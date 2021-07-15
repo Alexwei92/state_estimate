@@ -1,0 +1,19 @@
+<launch>
+
+    <!--Realsense Camera-->
+        
+        <!--D435i camera-->
+        <!-- <include file="$(find state_estimate)/launch/rs_d435i_vins.launch"/>       -->
+
+    <!--Rosbag-->>
+        <!-- <node pkg="rosbag" type="record" name="record" 
+            args="-O /home/$(env USER)/indoor_data2.bag 
+            /d435i/infra1/image_rect_raw /d435i/infra2/image_rect_raw /d435i/imu /t265/fisheye1/image_raw /t265/fisheye2/image_raw /t265/imu /t265/odom/sample"/> -->
+
+
+        <node pkg="rosbag" type="record" name="record" 
+            args="-O /home/$(env USER)/outdoor_data2.bag 
+            /d435i/infra1/image_rect_raw /d435i/infra2/image_rect_raw /d435i/imu /t265/fisheye1/image_raw /t265/fisheye2/image_raw /t265/imu /t265/odom/sample"/>
+
+
+</launch>

@@ -28,7 +28,7 @@
   <arg name="depth_fps"           default="30"/>
   <arg name="infra_fps"           default="30"/>
   <arg name="color_fps"           default="30"/>
-  <arg name="gyro_fps"            default="400"/>
+  <arg name="gyro_fps"            default="200"/>
   <arg name="accel_fps"           default="250"/>
   <arg name="enable_gyro"         default="true"/>
   <arg name="enable_accel"        default="true"/>
@@ -40,7 +40,7 @@
   <arg name="ordered_pc"                default="false"/>
 
   <arg name="enable_sync"               default="true"/>
-  <arg name="align_depth"               default="false"/>
+  <arg name="align_depth"               default="true"/>
 
   <arg name="publish_tf"                default="false"/>
   <arg name="tf_publish_rate"           default="0"/>
@@ -50,16 +50,11 @@
   <arg name="linear_accel_cov"          default="0.01"/>
   <arg name="initial_reset"             default="false"/>
   <arg name="unite_imu_method"          default="linear_interpolation"/>
-  <arg name="topic_odom_in"             default="odom_in"/>
-  <arg name="calib_odom_file"           default=""/>
-  <arg name="publish_odom_tf"           default="true"/>
 
   <arg name="stereo_module/exposure/1"  default="7500"/>
   <arg name="stereo_module/gain/1"      default="16"/>
   <arg name="stereo_module/exposure/2"  default="1"/>
   <arg name="stereo_module/gain/2"      default="16"/>
-
-
 
   <group ns="$(arg camera)">
     <include file="$(find realsense2_camera)/launch/includes/nodelet.launch.xml">
@@ -110,9 +105,6 @@
       <arg name="linear_accel_cov"         value="$(arg linear_accel_cov)"/>
       <arg name="initial_reset"            value="$(arg initial_reset)"/>
       <arg name="unite_imu_method"         value="$(arg unite_imu_method)"/>
-      <arg name="topic_odom_in"            value="$(arg topic_odom_in)"/>
-      <arg name="calib_odom_file"          value="$(arg calib_odom_file)"/>
-      <arg name="publish_odom_tf"          value="$(arg publish_odom_tf)"/>
       <arg name="stereo_module/exposure/1" value="$(arg stereo_module/exposure/1)"/>
       <arg name="stereo_module/gain/1"     value="$(arg stereo_module/gain/1)"/>
       <arg name="stereo_module/exposure/2" value="$(arg stereo_module/exposure/2)"/>
