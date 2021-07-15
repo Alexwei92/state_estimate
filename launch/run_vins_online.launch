@@ -16,7 +16,7 @@
 
         <arg name="config_path" value="$(find state_estimate)/config/d435i_kalibr/stereo_imu_config.yaml"
             if="$(eval arg('camera_type') == 'd435i')"/>
-        <arg name="config_path" value="$(find state_estimate)/config/t265_kalibr/fisheye_config.yaml"
+        <arg name="config_path" value="$(find state_estimate)/config/t265_kalibr/fisheye_imu_config.yaml"
             if="$(eval arg('camera_type') == 't265')"/>
         <!--Run vins_estimator-->
         <node pkg="vins" type="vins_node" name="vins_estimator" args="$(arg config_path)" required="true"/>

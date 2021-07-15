@@ -1,0 +1,20 @@
+<launch>
+    <arg name="enable_rviz" default="true"/>
+    <arg name="enable_loop_fusion" default="true"/>
+    <arg name="camera_type" default="d435i"/>
+
+    <!--VINS-Fusion-gpu-->
+        <!--Run rviz-->
+        <include file="$(find vins)/launch/vins_rviz.launch" if="$(arg enable_rviz)"/>
+
+        <arg name="config_path" value="$(find state_estimate)/config/d435i_kalibr/stereo_imu_config.yaml"
+            if="$(eval arg('camera_type') == 'd435i')"/>
+        <arg name="config_path" value="$(find state_estimate)/config/t265_kalibr/fisheye_imu_config.yaml"
+            if="$(eval arg('camera_type') == 't265')"/>
+        <!--Run vins_estimator-->
+        <node pkg="vins" type="vins_node" name="vins_estimator" output="screen" args="$(arg config_path)" required="true"/>
+
+        <!--Run loop_fusion-->
+        <node pkg="loop_fusion" type="loop_fusion_node" name="loop_fusion" output="screen" args="$(arg config_path)" if="$(arg enable_loop_fusion)"/>
+
+</launch>

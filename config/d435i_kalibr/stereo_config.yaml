@@ -5,9 +5,9 @@
 imu: 0         
 num_of_cam: 2 
 
-imu_topic: "/camera/imu"
-image0_topic: "/camera/infra1/image_rect_raw"
-image1_topic: "/camera/infra2/image_rect_raw"
+imu_topic: "/d435i/imu"
+image0_topic: "/d435i/infra1/image_rect_raw"
+image1_topic: "/d435i/infra2/image_rect_raw"
 output_path: "/home/lab/output/"
 
 cam0_calib: "left.yaml"

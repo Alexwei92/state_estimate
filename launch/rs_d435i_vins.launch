@@ -3,7 +3,7 @@
   <arg name="usb_port_id"         default=""/>
   <arg name="device_type"         default="d435"/>
   <arg name="json_file_path"      default="$(find state_estimate)/config/d435i_emitter_disabled_test.json"/>
-  <arg name="camera"              default="camera"/>
+  <arg name="camera"              default="d435i"/>
   <arg name="tf_prefix"           default="$(arg camera)"/>
   <arg name="external_manager"    default="false"/>
   <arg name="manager"             default="realsense2_camera_manager"/>
