@@ -1,12 +1,12 @@
 ## Install Ceres Solver
-cd ~/Downloads
+cd ~/Documents
 sudo apt-get install -y cmake libgoogle-glog-dev libgflags-dev libatlas-base-dev libeigen3-dev libsuitesparse-dev
 
 wget http://ceres-solver.org/ceres-solver-2.0.0.tar.gz
 tar zxf ceres-solver-2.0.0.tar.gz && rm ceres-solver-2.0.0.tar.gz
 mkdir ceres-bin && cd ceres-bin
 cmake ../ceres-solver-2.0.0 -DBUILD_EXAMPLS=OFF
-make -j12
+make -j6
 make test
 sudo make install
 
@@ -14,17 +14,17 @@ sudo make install
 
 ## Install OpenCV
 # Remove existing OpenCV-3.2.0
-sudo apt purge -y libopencv* python-opencv opencv-data
-sudo apt update
+# sudo apt purge -y libopencv* python-opencv opencv-data
+# sudo apt update
 
 # Install pre-request
 sudo apt install -y build-essential cmake pkg-config
-sudo apt install -y libjpeg-dev libpng-dev libtiff-dev libjasper-dev libwebp-dev libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev
+sudo apt install -y libjpeg-dev libpng-dev libtiff-dev libwebp-dev libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev
 sudo apt install -y libavcodec-dev libavformat-dev libswscale-dev libv4l-dev libxvidcore-dev libx264-dev libgtk-3-dev libatlas-base-dev gfortran
 sudo apt install -y python2.7-dev python3-dev
 
 # Download opencv and opencv_contrib
-cd ~/Downloads
+cd ~/Documents
 mkdir opencv-3.4.14 && cd opencv-3.4.14
 git clone https://github.com/opencv/opencv_contrib.git
 cd opencv_contrib
@@ -39,7 +39,7 @@ mkdir build && cd build
 cmake  -D CMAKE_BUILD_TYPE=Release \
        -D CMAKE_INSTALL_PREFIX=/usr/local \
        -D CUDA_FAST_MATH=1 \
-       -D CUDA_ARCH_BIN=6.2,7.2,7.5 \
+       -D CUDA_ARCH_BIN=7.2 \
        -D OPENCV_EXTRA_MODULES_PATH=../../opencv_contrib/modules \
        -D OPENCV_ENABLE_NONFREE=ON \
        -D ENABLE_FAST_MATH=1 \
@@ -71,7 +71,7 @@ cmake  -D CMAKE_BUILD_TYPE=Release \
        -D WITH_NVCUVID=OFF \
        -D WITH_CUDA=ON ..
 
-make -j12
+make -j6
 sudo make install
 
 ##################################
@@ -93,11 +93,27 @@ sudo vim /usr/local/cuda/include/cuda_gl_interop.h
 
 ##################################
 
-## Install ROS
-# Remove existing ROS
-sudo apt remove ros-melodic-*
-sudo rm /etc/ros/rosdep/sources.list.d/20-default.list
+## Install librealsense
+# Prepare
+sudo apt install -y git libssl-dev libusb-1.0-0-dev pkg-config libgtk-3-dev
+sudo apt install -y libglfw3-dev libgl1-mesa-dev libglu1-mesa-dev
 
+# Download and install
+cd ~/Documents
+git clone https://github.com/IntelRealSense/librealsense
+cd librealsense
+git checkout v2.48.0
+
+
+./librealsense/scripts/setup_udev_rules.sh
+mkdir build && cd build
+cmake ../ -DBUILD_EXAMPLES=true -DFORCE_LIBUVC=true -DBUILD_WITH_CUDA=true
+make -j6
+sudo make install
+
+##################################
+
+## Install ROS
 sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
 
 sudo apt install curl
@@ -106,7 +122,7 @@ sudo apt update
 
 # ROS-Base
 sudo apt install ros-melodic-ros-base
-sudo apt install ros-melodic-mavros ros-melodic-ddynamic-reconfigure ros-melodic-tf ros-melodic-image-transport ros-melodic-rviz
+sudo apt install ros-melodic-mavros ros-melodic-mavrox-extras ros-melodic-ddynamic-reconfigure ros-melodic-tf ros-melodic-image-transport ros-melodic-rviz
 
 echo "source /opt/ros/melodic/setup.bash" >> ~/.bashrc
 source ~/.bashrc
@@ -130,6 +146,19 @@ cd vision_opencv && git checkout melodic
 
 #  Build the package
 cd ../.. && catkin_make
+
+##################################
+
+## realsense-ros
+cd ~/catkin_ws/src
+git clone https://github.com/IntelRealSense/realsense-ros.git
+cd realsense-ros/
+git checkout 2.3.1
+
+cd ../..
+catkin_make -DCATKIN_ENABLE_TESTING=False -DCMAKE_BUILD_TYPE=Release
+catkin_make install
+catkin_make
 
 ##################################
 
