@@ -1,3 +1,14 @@
+## CUDA path
+# Add following to the ~/.bashrc
+export CUDA_HOME="/usr/local/cuda-10.2"
+export PATH="/usr/local/cuda-10.2/bin:$PATH"
+export LD_LIBRARY_PATH="/usr/local/cuda-10.2/lib64:$LD_LIBRARY_PATH"
+
+# then execute
+source ~/.bashrc
+
+##################################
+
 ## Install Ceres Solver
 cd ~/Documents
 sudo apt-get install -y cmake libgoogle-glog-dev libgflags-dev libatlas-base-dev libeigen3-dev libsuitesparse-dev
@@ -110,6 +121,11 @@ mkdir build && cd build
 cmake ../ -DBUILD_EXAMPLES=true -DFORCE_LIBUVC=true -DBUILD_WITH_CUDA=true -DBUILD_PYTHON_BINDINGS=true
 make -j6
 sudo make install
+
+# Add following to the ~/.bashrc
+export PYTHONPATH="$PYTHONPATH:/usr/local/lib/python3.6/pyrealsense2"
+# then execute 
+source ~/.bashrc
 
 ##################################
 
