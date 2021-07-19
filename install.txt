@@ -107,7 +107,7 @@ git checkout v2.48.0
 
 ./librealsense/scripts/setup_udev_rules.sh
 mkdir build && cd build
-cmake ../ -DBUILD_EXAMPLES=true -DFORCE_LIBUVC=true -DBUILD_WITH_CUDA=true
+cmake ../ -DBUILD_EXAMPLES=true -DFORCE_LIBUVC=true -DBUILD_WITH_CUDA=true -DBUILD_PYTHON_BINDINGS=true
 make -j6
 sudo make install
 
