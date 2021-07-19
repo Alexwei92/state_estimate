@@ -12,8 +12,8 @@
 
 
         <node pkg="rosbag" type="record" name="record" 
-            args="-O /home/$(env USER)/outdoor_data2.bag 
-            /d435i/infra1/image_rect_raw /d435i/infra2/image_rect_raw /d435i/imu /t265/fisheye1/image_raw /t265/fisheye2/image_raw /t265/imu /t265/odom/sample"/>
+            args="-O /home/$(env USER)/outdoor_data3.bag 
+            /d435i/infra1/image_rect_raw /d435i/infra2/image_rect_raw /d435i/imu /t265/fisheye1/image_raw /t265/fisheye2/image_raw /t265/imu /t265/odom/sample /tf /tf_static"/>
 
 
 </launch>
