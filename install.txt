@@ -52,6 +52,7 @@ cmake  -D CMAKE_BUILD_TYPE=Release \
        -D CUDA_FAST_MATH=1 \
        -D CUDA_ARCH_BIN=7.2 \
        -D OPENCV_EXTRA_MODULES_PATH=../../opencv_contrib/modules \
+       -D OPENCV_DNN_CUDA=ON \
        -D OPENCV_ENABLE_NONFREE=ON \
        -D ENABLE_FAST_MATH=1 \
        -D BUILD_PNG=OFF \
@@ -74,13 +75,13 @@ cmake  -D CMAKE_BUILD_TYPE=Release \
        -D WITH_GSTREAMER=ON \
        -D WITH_GSTREAMER_0_10=OFF \
        -D WITH_CUDA=ON \
+       -D WITH_CUDNN=ON \
        -D WITH_GTK=ON \
        -D WITH_VTK=OFF \
        -D WITH_TBB=ON \
        -D WITH_LIBV4L=ON \
        -D WITH_OPENEXR=OFF \
-       -D WITH_NVCUVID=OFF \
-       -D WITH_CUDA=ON ..
+       -D WITH_NVCUVID=OFF ..
 
 make -j6
 sudo make install
